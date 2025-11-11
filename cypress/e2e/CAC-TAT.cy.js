@@ -3,12 +3,12 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.visit('./src/index.html')
     //Antes de cada teste executar a visita no site.
   })
-  it('Verifica o titulo da aplicacao', () => {
+  it('01-Verifica o titulo da aplicacao', () => {
     cy.title()
       .should('be.equal', 'Central de Atendimento ao Cliente TAT')
     // Should e para verificar verificação imediata//
   })
-  it('Preencher os campos obrigatorios e enviar o formulario', () => {
+  it('02-Preencher os campos obrigatorios e enviar o formulario', () => {
     const longtext = Cypress._.repeat('Teste,', 700)
     // Função para repetir um txto por uma contidade de vezes
     cy.get('#firstName')
@@ -26,7 +26,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
       .contains('Mensagem enviada com sucesso.')
     //# Significa ID. E #significa classe.
   })
-  it('Exibe mensagem de erro ao submeter o formulario com email com formatacao invalida', () => {
+  it('03-Exibe mensagem de erro ao submeter o formulario com email com formatacao invalida', () => {
     const longtext = Cypress._.repeat('Teste,', 700)
     // Função para repetir um texto por uma contidade de vezes
     cy.get('#firstName')
@@ -43,7 +43,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
       .should('be.visible')
       .contains('Valide os campos obrigatórios!')
   })
-  it('Validar telefone com campoa numerico', () => {
+  it('04-Validar telefone com campoa numerico', () => {
     cy.get('#firstName')
       .type('Eduardo')
     cy.get('#lastName')
@@ -56,8 +56,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.contains('button', 'Enviar')
       .click()
   })
-
-  it('Exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', () => {
+  it('05-Exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', () => {
     const longtext = Cypress._.repeat('Teste,', 100)
     cy.get('#firstName')
       .type('Eduardo')
@@ -76,7 +75,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get('.error').should('be.visible')
       .contains('Valide os campos obrigatórios!')
   })
-  it('Preenche e limpa os campos nome, sobrenome, email e telefone', () => {
+  it('06-Preenche e limpa os campos nome, sobrenome, email e telefone', () => {
     cy.get('#firstName')
       .type('Eduardo')
       .should('have.value', 'Eduardo')
@@ -99,7 +98,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
       .clear()
       .should('be.empty')
   })
-  it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
+  it('07-Exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
     const longtext = Cypress._.repeat('Teste,', 100)
     cy.get('#firstName')
       .type('Eduardo')
@@ -152,38 +151,39 @@ describe('Central de Atendimento ao Cliente TAT', () => {
       .should('be.empty')
     cy.contains('button', 'Enviar')
       .click()
+    cy.wait(100)
     cy.get('.error')
       .should('be.visible')
       .contains('Valide os campos obrigatórios!')
   })
-  it('Envia o formuário com sucesso usando um comando customizado', () => {
+  it('08-Envia o formuário com sucesso usando um comando customizado', () => {
     cy.fillMandatoryFieldsAndSubmit()
     cy.get('.success').should('be.visible')
   })
-  it('seleciona um produto (YouTube) por seu texto', () => {
+  it('09-Seleciona um produto (YouTube) por seu texto', () => {
     cy.get('#product')
       .select('YouTube')
       .should('have.value', 'youtube')
       .should('be.visible')
   })
-  it('seleciona um produto (Mentoria) por seu valor (value)', () => {
+  it('10-Seleciona um produto (Mentoria) por seu valor (value)', () => {
     cy.get('#product')
       .select('mentoria')
       .should('have.value', 'mentoria')
       .should('be.visible')
   })
-  it('seleciona um produto (BLog) por seu indice (index)', () => {
+  it('11-Seleciona um produto (BLog) por seu indice (index)', () => {
     cy.get('#product')
       .select(1)
       .should('have.value', 'blog')
       .should('be.visible')
   })
-  it('Marcar o tipo de atendimento "Feedback"', () => {
+  it('12-Marcar o tipo de atendimento "Feedback"', () => {
     cy.get('input[type="radio"][value="feedback"]')
       .check()
       .should('be.checked')
   })
-  it('Marca cada tipo de atendimento 1 resolucao', () => {
+  it('13-Marca cada tipo de atendimento 1 resolucao', () => {
     cy.get('input[type="radio"][value="feedback"]')
       .check()
       .should('be.checked')
@@ -197,7 +197,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
       .should('be.checked')
       .should('have.to.value', 'elogio')
   })
-  it('Marca cada tipo de atendimento 2 resolucao', () => {
+  it('14-Marca cada tipo de atendimento 2 resolucao', () => {
     cy.get('input[type="radio"]')
       .each(typeOfservice => {
         cy.wrap(typeOfservice)
@@ -205,7 +205,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
           .should('be.checked')
       })
   })
-  it('Revisaro exercicio que exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
+  it('15-Revisar o exercicio que exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
     const longtext = Cypress._.repeat('Teste,', 100)
     cy.get('#firstName')
       .type('Eduardo')
@@ -262,8 +262,39 @@ describe('Central de Atendimento ao Cliente TAT', () => {
       .should('be.visible')
       .contains('Valide os campos obrigatórios!')
   })
-  it.only('Seleciona um arquivo da pasta fixtures', () => {
+  it('16-Seleciona um arquivo da pasta fixtures', () => {
     cy.get('input[type=file]')
-      .selectFile('cypress\fixtures\example.json')
+      .selectFile('cypress/fixtures/example.json')
+      .should(input => {
+        expect(input[0].files[0].name).to.equal('example.json')
+      })
+  })
+  it('17-Seleciona um arquivo simulando um drag-and-drop', () => {
+    cy.get('input[type=file]')
+      .selectFile('cypress/fixtures/example.json', { action: 'drag-drop' })
+      .should(input => {
+        expect(input[0].files[0].name).to.equal('example.json')
+      })
+  })
+  it('18-Seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', () => {
+    cy.fixture('example.json').as('sampleFile')
+    cy.get('input[type=file]')
+      .selectFile('@sampleFile')
+      .should(input => {
+        expect(input[0].files[0].name).to.equal('example.json')
+      })
+  })
+  it('19-Verifica que a política de privacidade abre em outra aba sem a necessidade de um clique', () => {
+    cy.contains('a', 'Política de Privacidade')
+      .should('have.attr', 'href', 'privacy.html')
+      .and('have.attr', 'target', '_blank')
+  })
+  it.only('20-Acessa a página da política de privacidade removendo o target e então clicando no link', () => {
+    cy.contains('a', 'Política de Privacidade')
+      .invoke('removeAttr', 'target')
+      .click()
+    cy.contains('h1', 'CAC TAT - Política de Privacidade')
+      .should('be.visible')
   })
 })  
+
