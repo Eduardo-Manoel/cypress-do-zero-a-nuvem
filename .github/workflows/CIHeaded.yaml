@@ -1,0 +1,12 @@
+name: Chrome headed
+on: push
+jobs:
+  cypress-run:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: cypress-io/github-action@v6
+      - uses: cypress-io/github-action@v6.1.0
+        with:
+          browser: chrome
+          headed: true

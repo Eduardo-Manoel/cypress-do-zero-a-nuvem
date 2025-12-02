@@ -10,5 +10,6 @@ jobs:
         with:
           chrome-version: 140
       - uses: cypress-io/github-action@v6
+      - uses: cypress-io/github-action@v6.1.0
         with:
           browser: chrome-for-testing

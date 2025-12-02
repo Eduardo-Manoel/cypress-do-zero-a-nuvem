@@ -1,0 +1,12 @@
+name: Chrome
+on: push
+jobs:
+  chrome:
+    runs-on: ubuntu-24.04
+    name: E2E on Chrome
+    steps:
+      - uses: actions/checkout@v5
+      - uses: cypress-io/github-action@v6
+      - uses: cypress-io/github-action@v6.1.0
+        with:
+          browser: chrome

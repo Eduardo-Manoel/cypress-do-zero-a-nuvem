@@ -1,0 +1,12 @@
+name: Edge
+on: push
+jobs:
+  edge:
+    runs-on: ubuntu-24.04
+    name: E2E on Edge
+    steps:
+      - uses: actions/checkout@v5
+      - uses: cypress-io/github-action@v6
+      - uses: cypress-io/github-action@v6.1.0
+        with:
+          browser: edge
