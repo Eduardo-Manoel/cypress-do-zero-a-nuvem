@@ -6,7 +6,11 @@ jobs:
     name: E2E on Edge
     steps:
       - uses: actions/checkout@v5
+        with:
+          browser: edge
       - uses: cypress-io/github-action@v6
+        with:
+          browser: edge
       - uses: cypress-io/github-action@v6.1.0
         with:
           browser: edge
