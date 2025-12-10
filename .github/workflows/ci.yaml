@@ -10,6 +10,10 @@ jobs:
         uses: cypress-io/github-action@v6
       - name: Cypress run
         uses: cypress-io/github-action@v6.1.0
+        env:
+          CYPRESS_RECORD_KEY: ${{secrets.CYPRESS_RECORD_KEY}}
+        with: 
+          command: npm run test:cloud 
         
           
 
