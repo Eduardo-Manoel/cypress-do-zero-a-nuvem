@@ -5,18 +5,11 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
-        with:
-          browser: chrome
-          headed: true
       - uses: cypress-io/github-action@v6
-        with:
-          browser: chrome
-          headed: true
       - uses: cypress-io/github-action@v6.1.0
-        with:
-          browser: chrome
-          headed: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
         with: 
           command: npm run test:cloud 
+          browser: chrome
+          headed: true

@@ -1,23 +1,23 @@
 name: Chrome for Testing
 on: push
+
 jobs:
   chrome:
     runs-on: ubuntu-24.04
     name: E2E on Chrome for Testing
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout
+        uses: actions/checkout@v5
+      
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v2
         with:
-          browser: chrome-for-testing
-      - uses: browser-actions/setup-chrome@v2
+          chrome-version: 140  # Versão específica do Chrome for Testing
+      
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
         with:
-          chrome-version: 140
-      - uses: cypress-io/github-action@v6
-        with:
-          browser: chrome-for-testing
-      - uses: cypress-io/github-action@v6.1.0
-        with:
-          browser: chrome-for-testing
+          browser: chrome
+          command: npm run test:cloud
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-        with: 
-          command: npm run test:cloud 

@@ -1,9 +1,9 @@
-name: Chrome
+name: Opera
 on: push
 jobs:
-  chrome:
+  firefox:
     runs-on: ubuntu-24.04
-    name: E2E on Chrome
+    name: E2E on Opera
     steps:
       - uses: actions/checkout@v5
       - uses: cypress-io/github-action@v6
@@ -11,8 +11,5 @@ jobs:
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
         with:
-          browser: chrome
-          command: npm run test:cloud 
-        
-       
-        
+          command: npm run test:cloud
+          browser: opera
